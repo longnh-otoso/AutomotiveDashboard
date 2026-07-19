@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0B0D"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- 1. THANH TRÊN CÙNG (TOP BAR): Giờ, Trạng thái số (P R N D), Nhiệt độ -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <TextView
+            android:id="@+id/txtTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:18 PM"
+            android:textColor="#00F0FF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+            
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+            
+        <!-- Cụm chuyển số P R N D -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="P  R  "
+            android:textColor="#555555"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+            
+        <TextView
+            android:id="@+id/txtGearN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N"
+            android:textColor="#00F0FF"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+            
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  D"
+            android:textColor="#555555"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+            
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+            
+        <TextView
+            android:id="@+id/txtTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21°C"
+            android:textColor="#A0AEC0"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- CỘT BÊN TRÁI (LEFT PANEL): Tốc độ + Biển báo giới hạn -->
+    <LinearLayout
+        android:id="@+id/leftPanel"
+        android:layout_width="220dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        android:layout_margin="16dp">
+        
+        <!-- Hiển thị tốc độ xe (Neon Cyan) -->
+        <TextView
+            android:id="@+id/txtSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#00F0FF"
+            android:textSize="80sp"
+            android:textStyle="bold" />
+            
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mph"
+            android:textColor="#A0AEC0"
+            android:textSize="18sp"
+            android:layout_marginTop="-10dp" />
+            
+        <!-- Biển báo giới hạn tốc độ -->
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/speed_limit_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LIMIT"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="70"
+                android:textColor="#000000"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginTop="-5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- CỘT GIỮA (CENTER PANEL): Ô tô Vector + Đèn xi nhan nhấp nháy -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/centerPanel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintEnd_toStartOf="@+id/rightPanel"
+        app:layout_constraintStart_toEndOf="@+id/leftPanel"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        android:layout_margin="16dp">
+        
+        <!-- Đường vẽ ô tô từ trên xuống -->
+        <ImageView
+            android:id="@+id/imgCarOutline"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_car_silhouette"
+            android:contentDescription="Car Silhouette"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+            
+        <!-- Đèn xi-nhan Trái (Neon Orange) -->
+        <ImageView
+            android:id="@+id/glowLeftTurn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_turn_left"
+            android:contentDescription="Left Turn Indicator"
+            app:tint="#FF8F00"
+            android:alpha="0.0" 
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="40dp" />
+            
+        <!-- Đèn xi-nhan Phải (Neon Orange) -->
+        <ImageView
+            android:id="@+id/glowRightTurn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_turn_right"
+            android:contentDescription="Right Turn Indicator"
+            app:tint="#FF8F00"
+            android:alpha="0.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="40dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- CỘT BÊN PHẢI (RIGHT PANEL): Phần trăm Pin + Trình phát nhạc -->
+    <LinearLayout
+        android:id="@+id/rightPanel"
+        android:layout_width="260dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        android:layout_margin="16dp">
+        
+        <!-- Vùng hiển thị Pin (Circular Progress) -->
+        <FrameLayout
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="20dp">
+            
+            <ProgressBar
+                android:id="@+id/progressBattery"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/circular_battery_progress" />
+                
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+                
+                <TextView
+                    android:id="@+id/txtBatteryPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+                    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BATTERY"
+                    android:textColor="#A0AEC0"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+        </FrameLayout>
+        
+        <!-- Widget chơi nhạc (Media Card) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_bg"
+            android:orientation="vertical"
+            android:padding="16dp">
+            
+            <TextView
+                android:id="@+id/txtSongTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Highway Star"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+                
+            <TextView
+                android:id="@+id/txtArtist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deep Purple"
+                android:textColor="#00F0FF"
+                android:textSize="12sp" />
+            
+            <SeekBar
+                android:id="@+id/musicSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progress="45"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Nút Bật/Tắt Đèn (Gửi xuống CAN 0x200) -->
+        <Button
+            android:id="@+id/btnToggleLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_light_bg"
+            app:backgroundTint="@null"
+            android:text="BẬT ĐÈN XE"
+            android:textColor="#FF8F00"
+            android:textStyle="bold" />
+
+        <!-- Nút Nháy Đèn (Gửi xuống CAN 0x200) -->
+        <Button
+            android:id="@+id/btnToggleBlink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_light_bg"
+            app:backgroundTint="@null"
+            android:text="BẬT NHẤP NHÁY"
+            android:textColor="#FF8F00"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- THANH DƯỚI CÙNG (BOTTOM BAR): Điều hòa & Nút kết nối -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <Button
+            android:id="@+id/btnConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_connect_bg"
+            app:backgroundTint="@null"
+            android:text="KẾT NỐI CAN"
+            android:textColor="#00F0FF"
+            android:textStyle="bold"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+            
+        <TextView
+            android:id="@+id/txtLastCanFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAN: Đang chờ tín hiệu..."
+            android:textColor="#FF8F00"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp" />
+            
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+            
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HVAC: 21°C  |  AUTO"
+            android:textColor="#A0AEC0"
+            android:textSize="16sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
